@@ -3,10 +3,11 @@ import sys
 import os
 
 def input_parse(argv):
-	if len(argv)<2:
-		print ("Not enough arguments.")
-		return None,None
-	else:
+	#print(argv[0].strip('./\\'))
+	if argv[0].strip('./\\')=='memory_summary.py':
+		if len(argv)<2:
+			print ("Not enough arguments.")
+			return None,None
 		i=len(argv)-1
 		input=[]
 		flags={'-m':True,'-f':False}
@@ -36,7 +37,33 @@ def input_parse(argv):
 					print("error with input directory or input file")
 					return None,None
 			i-=1
-	return input,flags
+		return input,flags
+	elif argv[0].strip('./\\')=='search_file.py':
+		input=[]
+		if len(argv)<3:
+			print ("Not enough arguments.")
+			return None,None
+		filename=argv[-1]
+		for i in range(1,len(argv)-1):
+			if os.path.exists(argv[i]):
+				input.append(argv[i])
+		if not input:
+			print('Please input valid searching path')
+			return None,None
+		return input,filename
+	elif argv[0].strip('./\\')=='memoryeat_file.py':
+		input=[]
+		if len(argv)<3:
+			print ("Not enough arguments.")
+			return None,None
+		N=int(argv[-1])
+		for i in range(1,len(argv)-1):
+			if os.path.exists(argv[i]):
+				input.append(argv[i])
+		if not input:
+			print('Please input valid searching path')
+			return None,None
+		return input,N
 			
 		
 				

@@ -4,7 +4,9 @@ from itertools import chain
 import textwrap
 import time
 import heapq
+import logging
 
+logging.basicConfig(filename='log.log',level=logging.DEBUG)
 
 class node(object):
 	def __init__(self,name):
@@ -52,7 +54,7 @@ class Mem_Tree(object):
 			try:
 				names=os.listdir(cur_path)
 			except PermissionError as err:
-				print ('Handling permission error',err)
+				logging.warning(err)
 			for name in names:
 				complete_path=os.path.join(cur_path,name)
 				new_node=node(complete_path)
@@ -69,9 +71,9 @@ class Mem_Tree(object):
 						tmp['mem']=memory
 						self._list.append(tmp)
 					except PermissionError as err:
-						print ('Handling permission error',err)
+						logging.warning(err)
 					except FileNotFoundError as err:
-						print ('Handling file not found error',err)
+						logging.warning(err)
 					
 
 	def search(self,filename):
@@ -143,7 +145,7 @@ class Mem_Tree(object):
 				else:
 					print(textwrap.indent(name,''.join([' ']*indent_size)))
 			except UnicodeEncodeError as err:
-				print ('Handling unicode encode error',err)
+				logging.debug(err)
 			for k in cur_node.kiddir:
 				DFS.append(k)
 			if not f:

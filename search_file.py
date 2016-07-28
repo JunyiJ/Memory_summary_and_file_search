@@ -9,24 +9,23 @@ from Memory_Tree import Mem_Tree
 from input_parse import input_parse
 
 '''
-	Summarize the memory usage in provided folders with two flag options:
-		-m:default=1,meaning print with memory usage, 0 meaning print without memory
-		-f:default=0,meaning print with both folders and files, 1 meaning print only folders
-		To run this command, in your commandline, type:
-		python .\memory_summary.py 'D:/'  -f 1
+	Search the complete path of a file provided by user from one or several paths
+	Please provide a precise name for the file that you want to search
+	If the file has several copies in different paths, the running result will show all paths
+	To run this command, in your commandline, type:
+	python .\search_file.py 'D:/'  filename
 '''
 
 start_time=time.time()	
-input,flags=input_parse(sys.argv)
+input,filename=input_parse(sys.argv)
 if not input:
 	print("There is some problem with your input. Please follow the example below")
 	print ("for example, python './memory_summary' 'C:/' -m 0 -f 1")
 else:
 	T=Mem_Tree()
 	T.initialize(input)
-	T.update_memory_all()
-	T.pretty_print(m=flags['-m'],f=flags['-f'])
-
+	#T.update_memory_all()
+	T.search(filename)
 end_time=time.time()
 print("Running time is: ",end_time-start_time)
 
