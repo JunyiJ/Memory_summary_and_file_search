@@ -25,8 +25,9 @@ def input_parse(argv):
 						print ("Please input flag value pairs in the right order.")
 						print("The flag is either -m(means without memory size or not), or -f(means folder only or not)")
 						return None,None
-			elif os.path.exists(argv[i]):
-				input.append(argv[i])
+			elif os.path.isdir(argv[i]):
+				if os.path.exists(argv[i]):
+					input.append(argv[i])
 			else:
 				try:
 					with open(argv[i],'r') as f:
@@ -45,8 +46,18 @@ def input_parse(argv):
 			return None,None
 		filename=argv[-1]
 		for i in range(1,len(argv)-1):
-			if os.path.exists(argv[i]):
-				input.append(argv[i])
+			if os.path.isdir(argv[i]):
+				if os.path.exists(argv[i]):
+					input.append(argv[i])
+			else:
+				try:
+					with open(argv[i],'r') as f:
+						for line in f:
+							line=line.strip()
+							input.append(line)
+				except FileNotFoundError as err:
+					print("error with input directory or input file")
+					return None,None
 		if not input:
 			print('Please input valid searching path')
 			return None,None
@@ -58,8 +69,20 @@ def input_parse(argv):
 			return None,None
 		N=int(argv[-1])
 		for i in range(1,len(argv)-1):
-			if os.path.exists(argv[i]):
-				input.append(argv[i])
+			if os.path.isdir(argv[i]):
+				if os.path.exists(argv[i]):
+					input.append(argv[i])
+				else:
+					print("error with input directory")
+			else:
+				try:
+					with open(argv[i],'r') as f:
+						for line in f:
+							line=line.strip()
+							input.append(line)
+				except FileNotFoundError as err:
+					print("error with input directory or input file")
+					return None,None
 		if not input:
 			print('Please input valid searching path')
 			return None,None

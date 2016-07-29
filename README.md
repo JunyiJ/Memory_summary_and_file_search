@@ -14,8 +14,9 @@ The scripts provided here aim to:
   
 ## Usage
 	1. To get the folder structure and memory usage summary on it (for example, the folder name is 'D:/').
-		you can provided several paths or you can list all the paths in a file(separated by new line) and feed the file
-		name to the command.
+		you can provided several paths or 
+		you can list all the paths in a file(separated by new line) 
+		and feed the filename to the command. (in the file, please don't add quote around path)
 		- list path directly in command line
 		python .\memory_summary.py 'D:/'
 		- list path in a file and feed the file (path_all.txt) to command line
@@ -23,7 +24,8 @@ The scripts provided here aim to:
 		There are also two flags -m (default 1) and -f (default 0).
 		set -m 1 means show the memory usage as well and set -m 0 means do not show memory
 		set -f 1 means only show folders and subfolders and set -m 1 means show both folders and files
-		for example: python .\memory_summary.py 'D:/' -m 0 -f 1 means show only folders in folder D without memory summary
+		for example: python .\memory_summary.py 'D:/' -m 0 -f 1 
+		means show only folders in folder D without memory summary
 	2. To search a file in a suspect folder or several foldes, in your command line type:
 		python .\search_file.py 'D:/'  filename
 	3. To find the most N memory consuming files, run this command, in your commandline, type:

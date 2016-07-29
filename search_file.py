@@ -18,6 +18,7 @@ from input_parse import input_parse
 
 start_time=time.time()	
 input,filename=input_parse(sys.argv)
+#print(input)
 if not input:
 	print("There is some problem with your input. Please follow the example below")
 	print ("for example, python './memory_summary' 'C:/' -m 0 -f 1")
